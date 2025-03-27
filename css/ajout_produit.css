@@ -154,3 +154,21 @@ label[for="image"]:hover {
 input[type="file"]:valid + #image-preview-container #image-name {
     display: block;
 }
+/* Style pour le champ de sélection de la catégorie */
+section select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* Assurer que la catégorie est bien placée avant l'image */
+#categorie {
+    margin-bottom: 1rem;
+}
+

@@ -15,13 +15,21 @@ try {
     die("Erreur lors de la récupération des produits : " . $e->getMessage());
 }
 
+// Récupérer toutes les catégories
+try {
+    $stmt = $pdo->query('SELECT id_cat, nom_categorie FROM categories ORDER BY nom_categorie ASC');
+    $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Erreur lors de la récupération des catégories : " . $e->getMessage());
+}
+
 // Vérifier si l'ID du produit est passé
 if (isset($_POST['id_produit']) && !empty($_POST['id_produit'])) {
     $id_produit = $_POST['id_produit'];
 
-    // Récupérer les détails du produit sélectionné
+    // Récupérer les détails du produit sélectionné avec sa catégorie
     try {
-        $stmt = $pdo->prepare('SELECT * FROM produits WHERE id_produit = ?');
+        $stmt = $pdo->prepare('SELECT p.*, c.id_cat FROM produits p LEFT JOIN categories c ON p.id_cat = c.id_cat WHERE p.id_produit = ?');
         $stmt->execute([$id_produit]);
         $produit = $stmt->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
@@ -31,11 +39,12 @@ if (isset($_POST['id_produit']) && !empty($_POST['id_produit'])) {
 
 // Vérifier si le formulaire de modification a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($produit)) {
-    if (isset($_POST['Libelle']) && isset($_POST['prix']) && isset($_POST['quantite'])) {
+    if (isset($_POST['Libelle']) && isset($_POST['prix']) && isset($_POST['quantite']) && isset($_POST['id_cat'])) {
         $libelle = $_POST['Libelle'];
         $prix = $_POST['prix'];
         $quantite = $_POST['quantite'];
-        $image = isset($_FILES['image']['name']) ? $_FILES['image']['name'] : $produit['image'];
+        $id_cat = $_POST['id_cat'];
+        $image = isset($_FILES['image']['name']) && !empty($_FILES['image']['name']) ? $_FILES['image']['name'] : $produit['image'];
 
         // Si une nouvelle image a été téléchargée
         if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
@@ -43,9 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($produit)) {
         }
 
         try {
-            // Mise à jour des informations du produit
-            $stmt = $pdo->prepare('UPDATE produits SET Libelle = ?, prix = ?, quantite = ?, image = ? WHERE id_produit = ?');
-            $stmt->execute([$libelle, $prix, $quantite, $image, $id_produit]);
+            // Mise à jour du produit avec la catégorie
+            $stmt = $pdo->prepare('UPDATE produits SET Libelle = ?, prix = ?, quantite = ?, id_cat = ?, image = ? WHERE id_produit = ?');
+            $stmt->execute([$libelle, $prix, $quantite, $id_cat, $image, $id_produit]);
 
             $message = "Le produit a été modifié avec succès!";
             $success = true;
@@ -71,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($produit)) {
 
     <?php if ($success): ?>
         <p class="message"><?= htmlspecialchars($message) ?></p>
-        <a href="crud.php" class="btn-return">Retour</a>
+        <a href="administration.php" class="btn-return">Retour</a>
     <?php else: ?>
         <!-- Sélection du produit -->
         <form method="POST" action="" enctype="multipart/form-data">
@@ -94,6 +103,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($produit)) {
 
                 <label for="Libelle">Nom du Produit :</label>
                 <input type="text" id="Libelle" name="Libelle" value="<?= htmlspecialchars($produit['Libelle']) ?>" required>
+
+                <label for="categorie">Catégorie :</label>
+                <select id="categorie" name="id_cat" required>
+                    <option value="">-- Choisissez une catégorie --</option>
+                    <?php foreach ($categories as $cat): ?>
+                        <option value="<?= htmlspecialchars($cat['id_cat']) ?>" <?= (isset($produit) && $produit['id_cat'] == $cat['id_cat']) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($cat['nom_categorie']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
 
                 <label for="prix">Prix :</label>
                 <input type="number" id="prix" name="prix" value="<?= htmlspecialchars($produit['prix']) ?>" required>

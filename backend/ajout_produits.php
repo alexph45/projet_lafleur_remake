@@ -5,12 +5,21 @@ include('../php/connect.php');
 // Variable pour les messages
 $message = '';
 
+// Récupérer la liste des catégories pour la liste déroulante
+try {
+    $stmt = $pdo->query("SELECT id_cat, nom_categorie FROM categories");
+    $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    $message = '<div class="error-message">Erreur lors du chargement des catégories : ' . $e->getMessage() . '</div>';
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Récupérer les données du formulaire
     $libelle = $_POST['libelle'];
     $prix = $_POST['prix'];
     $quantite = $_POST['quantite'];
+    $id_cat = $_POST['id_cat'];
 
     // Vérifier si une image a été téléchargée
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
@@ -20,13 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $image_size = $_FILES['image']['size'];
 
         // Définir un répertoire pour enregistrer les images
-        $target_dir = "../images/"; // Modifier le chemin pour pointer vers le dossier images
+        $target_dir = "../images/";
         $target_file = $target_dir . basename($image_name);
 
-        // Vérifier si le fichier est une image valide (par exemple, JPG, PNG, etc.)
+        // Vérifier si le fichier est une image valide
         $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
         if (in_array($image_type, $allowed_types)) {
-            // Déplacer le fichier téléchargé vers le répertoire cible
             if (move_uploaded_file($image_tmp_name, $target_file)) {
                 $image_path = $target_file;
             } else {
@@ -39,32 +47,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = '<div class="error-message">Aucune image téléchargée ou erreur lors du téléchargement.</div>';
     }
 
-    // Si une image est téléchargée avec succès, on insère les données dans la base
     if (empty($message)) {
         try {
-            // Insérer le produit dans la base de données
-            $sql = "INSERT INTO produits (Libelle, prix, quantite, image) VALUES (:Libelle, :prix, :quantite, :image)";
+            // Insérer le produit avec la catégorie sélectionnée
+            $sql = "INSERT INTO produits (Libelle, prix, quantite, image, id_cat) VALUES (:Libelle, :prix, :quantite, :image, :id_cat)";
             $stmt = $pdo->prepare($sql);
 
-            // Lier les paramètres avec les données du formulaire
             $stmt->bindParam(':Libelle', $libelle, PDO::PARAM_STR);
             $stmt->bindParam(':prix', $prix, PDO::PARAM_STR);
             $stmt->bindParam(':quantite', $quantite, PDO::PARAM_INT);
             $stmt->bindParam(':image', $image_path, PDO::PARAM_STR);
+            $stmt->bindParam(':id_cat', $id_cat, PDO::PARAM_INT);
 
-            // Exécuter la requête d'insertion
             if ($stmt->execute()) {
                 $message = '<div class="success-message">Le produit a été ajouté avec succès !</div>';
-                header('Location: ajout_produits.php'); // Rediriger après ajout
+                header('Location: ajout_produits.php');
+                exit();
             } else {
-                $message = '<div class="error-message">Erreur lors de l\'ajout du produit: ' . $stmt->errorInfo()[2] . '</div>';
+                $message = '<div class="error-message">Erreur lors de l\'ajout du produit.</div>';
             }
         } catch (PDOException $e) {
-            $message = '<div class="error-message">Erreur lors de l\'exécution de la requête: ' . $e->getMessage() . '</div>';
+            $message = '<div class="error-message">Erreur SQL : ' . $e->getMessage() . '</div>';
         }
     }
 
-    // Fermer la connexion
     $pdo = null;
 }
 ?>
@@ -79,7 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <main>
         <section>
-            <!-- Affichage du message d'erreur ou de succès -->
             <?php if ($message): ?>
                 <div class="message"><?= $message ?></div>
             <?php endif; ?>
@@ -94,13 +99,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="quantite">Quantité:</label>
                 <input type="number" id="quantite" name="quantite" required>
 
+                <label for="id_cat">Catégorie:</label>
+                <select id="id_cat" name="id_cat" required>
+                    <option value="">Sélectionnez une catégorie</option>
+                    <?php foreach ($categories as $categorie): ?>
+                        <option value="<?= $categorie['id_cat'] ?>"><?= htmlspecialchars($categorie['nom_categorie']) ?></option>
+                    <?php endforeach; ?>
+                </select>
+
                 <label for="image">Image du Produit:</label>
                 <input type="file" id="image" name="image" accept="image/*" required>
                 <div id="image-preview-container">
                     <img id="image-preview" style="display: none; max-width: 150px; margin-top: 10px;" />
                     <span id="image-name" style="display: none; margin-top: 10px; color: #333;"></span>
                 </div>
-
 
                 <button type="submit">Ajouter le Produit</button>
             </form>
@@ -110,41 +122,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <footer>
         <p>© 2025 - Société Lafleur</p>
     </footer>
+
     <script>
-        // Sélectionner les éléments nécessaires
-const fileInput = document.getElementById('image');
-const imagePreview = document.getElementById('image-preview');
-const imageName = document.getElementById('image-name');
+        const fileInput = document.getElementById('image');
+        const imagePreview = document.getElementById('image-preview');
+        const imageName = document.getElementById('image-name');
 
-// Écouter l'événement de changement du fichier
-fileInput.addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    
-    // Si un fichier est sélectionné
-    if (file) {
-        // Si le fichier est une image, afficher l'image en miniature
-        if (file.type.startsWith('image/')) {
-            const reader = new FileReader();
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
 
-            reader.onload = function(e) {
-                imagePreview.src = e.target.result;
-                imagePreview.style.display = 'block';
-                imageName.style.display = 'none'; // Cacher le nom si une image est choisie
-            };
-            reader.readAsDataURL(file);
-        } else {
-            // Si ce n'est pas une image, afficher le nom du fichier
-            imagePreview.style.display = 'none'; // Cacher l'image si ce n'est pas une image
-            imageName.textContent = file.name;
-            imageName.style.display = 'block';
-        }
-    } else {
-        // Réinitialiser si aucun fichier n'est sélectionné
-        imagePreview.style.display = 'none';
-        imageName.style.display = 'none';
-    }
-});
+            if (file) {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
 
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                        imageName.style.display = 'none';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    imagePreview.style.display = 'none';
+                    imageName.textContent = file.name;
+                    imageName.style.display = 'block';
+                }
+            } else {
+                imagePreview.style.display = 'none';
+                imageName.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>

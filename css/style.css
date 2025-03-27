@@ -114,6 +114,15 @@ footer {
 .card-button:hover {
   background-color: #218838;
 }
+/* Style pour limiter la taille des images dans les cartes */
+.card img {
+  width: 120px;   /* Largeur de l'image */
+  height: 90px;   /* Hauteur de l'image */
+  object-fit: cover;  /* Permet de couvrir l'espace sans déformer l'image */
+  border-radius: 8px; /* Coins arrondis pour les images */
+  margin-bottom: 1rem; /* Espacement sous l'image */
+}
+
 
 /* Centrer une image */
 img {
