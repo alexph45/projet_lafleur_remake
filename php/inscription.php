@@ -57,7 +57,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Inscription - Société Lafleur</title>
-    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="css/style2.css">
     <link rel="icon" type="image/gif" href="icons8-fleur-16.ico" /> 
 </head>
 <body>

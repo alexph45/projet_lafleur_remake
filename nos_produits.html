@@ -1,117 +1,96 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta charset="UTF-8">
-
-      <title>Nos produits</title>
-	<link rel="stylesheet" href="style.css">
-	<link rel="icon" type="image/gif" href="icons8-fleur-16.ico" /> 
-</head>
-   <header>
-	    <header>
-	    <h1><img src="ACCUEIL.jpg" width=2%>Société Lafleur</h1>
-		<h2>6, cloitre St Aignan<h2>
-		<h3>45 000 Orléans<h3>
-		</header>
-	  </header>
-	  <nav>
-		<a href="index.html" 
-	  >Accueil</a>
-	  
-	  <a href="nos_produits.html" 
-	  >Nos produits</a>
-	  
-	  <a href="Bulbes.html" 
-	  >Bulbes</a>
-	  
-	  <a href="Rosiers.html" 
-	  >Rosiers</a>
-	  
-	  <a href="plante_a_massif.html" 
-	  >Plantes à massif</a>
-      </nav>
-	  <br>
-	  <br>
-	 <head>
-    <title>Tableau à 4 colonnes</title>
+    <meta charset="UTF-8">
+    <title>Nos produits</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/gif" href="icons8-fleur-16.ico" />
 </head>
 <body>
-
-<table border="1" >
-    <tr>
-        <th>Image</th>
-        <th>Code</th>
-        <th>Libellé</th>
-        <th>Prix</th>
-    </tr>
-    <tr>
-        <td><img src="bulbes_begonia.jpg"</td>
-        <td>B01</td>
-        <td>3 bulbes de bégonias</td>
-        <td>5 euros</td>
-    </tr>
-    <tr>
-        <td><img src="bulbes_dahlia.jpg"</td>
-        <td>B02</td>
-        <td>10 bulbes de dahlias</td>
-        <td>12 euros</td>
-    </tr>
-    <tr>
-        <td><img src="bulbes_glaieul.jpg"</td>
-        <td>B03</td>
-        <td>50 glaîeuls</td>
-        <td>9 euros</td>
-			
-    </tr>
-	
-    <tr>
-        <td><img src="massif_marguerite.jpg"</td>
-        <td>M01</td>
-        <td>Lot de 3 marguerites</td>
-        <td>5 euros</td>
-    </tr>
-    <tr>
-        <td><img src="massif_pensee.jpg"</td>
-        <td>M02</td>
-        <td>Pour un bouquet de 6 pensées</td>
-        <td>6 euros</td>
-    </tr>
-    <tr>
-        <td><img src="massif_melange.jpg"</td>
-        <td>M03</td>
-        <td>Mélange varier de 10 plantes à massifs</td>
-        <td>15 euros</td>
-	
-    </tr>
-	
-    <tr>
-        <td><img src="rosiers_gdefleur.jpg"</td>
-        <td>R01</td>
-        <td>1 pied spécial "grandes fleurs"</td>
-        <td>20 euros</td>
-    </tr>
-    <tr>
-        <td><img src="rosiers_parfum.jpg"</td>
-        <td>R02</td>
-        <td>Une variété sélectionné pour son parfum</td>
-        <td>9 euros</td>
-    </tr>
-    <tr>
-        <td><img src="rosiers_arbuste.jpg"</td>
-        <td>R03</td>
-        <td>Rosier arbuste</td>
-        <td>8 euros</td>
-	
-    </tr>
-</table>
-</table>
-
-
-</body>
-</main>
-	  <footer>
+    <header>
+        <h1><img src="ACCUEIL.jpg" width="2%">Société Lafleur</h1>
+        <h2>6, cloitre St Aignan</h2>
+        <h3>45 000 Orléans</h3>
+    </header>
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="nos_produits.html">Nos produits</a>
+        <a href="Bulbes.html">Bulbes</a>
+        <a href="Rosiers.html">Rosiers</a>
+        <a href="plante_a_massif.html">Plantes à massif</a>
+    </nav>
+    <br><br>
+    <main>
+        <div class="card-container">
+            <!-- Carte pour 3 bulbes de bégonias -->
+            <div class="card">
+                <img src="bulbes_begonia.jpg" alt="3 bulbes de bégonias">
+                <h3 class="card-title">3 bulbes de bégonias</h3>
+                <p class="card-content">Code: B01</p>
+                <p class="card-content">Prix: 5 euros</p>
+                <button class="card-button">Acheter</button>
+            </div>
+            <!-- Répétez pour chaque produit -->
+            <div class="card">
+                <img src="bulbes_dahlia.jpg" alt="10 bulbes de dahlias">
+                <h3 class="card-title">10 bulbes de dahlias</h3>
+                <p class="card-content">Code: B02</p>
+                <p class="card-content">Prix: 12 euros</p>
+                <button class="card-button">Acheter</button>
+            </div>
+            <div class="card">
+                <img src="bulbes_glaieul.jpg" alt="50 glaïeuls">
+                <h3 class="card-title">50 glaïeuls</h3>
+                <p class="card-content">Code: B03</p>
+                <p class="card-content">Prix: 9 euros</p>
+                <button class="card-button">Acheter</button>
+            </div>
+            <div class="card">
+                <img src="massif_marguerite.jpg" alt="Lot de 3 marguerites">
+                <h3 class="card-title">Lot de 3 marguerites</h3>
+                <p class="card-content">Code: M01</p>
+                <p class="card-content">Prix: 5 euros</p>
+                <button class="card-button">Acheter</button>
+            </div>
+            <div class="card">
+                <img src="massif_pensee.jpg" alt="Bouquet de 6 pensées">
+                <h3 class="card-title">Bouquet de 6 pensées</h3>
+                <p class="card-content">Code: M02</p>
+                <p class="card-content">Prix: 6 euros</p>
+                <button class="card-button">Acheter</button>
+            </div>
+            <div class="card">
+                <img src="massif_melange.jpg" alt="Mélange varié de 10 plantes à massifs">
+                <h3 class="card-title">Mélange varié de 10 plantes à massifs</h3>
+                <p class="card-content">Code: M03</p>
+                <p class="card-content">Prix: 15 euros</p>
+                <button class="card-button">Acheter</button>
+            </div>
+            <div class="card">
+                <img src="rosiers_gdefleur.jpg" alt="1 pied spécial 'grandes fleurs'">
+                <h3 class="card-title">1 pied spécial 'grandes fleurs'</h3>
+                <p class="card-content">Code: R01</p>
+                <p class="card-content">Prix: 20 euros</p>
+                <button class="card-button">Acheter</button>
+            </div>
+            <div class="card">
+                <img src="rosiers_parfum.jpg" alt="Variété sélectionnée pour son parfum">
+                <h3 class="card-title">Variété sélectionnée pour son parfum</h3>
+                <p class="card-content">Code: R02</p>
+                <p class="card-content">Prix: 9 euros</p>
+                <button class="card-button">Acheter</button>
+            </div>
+            <div class="card">
+                <img src="rosiers_arbuste.jpg" alt="Rosier arbuste">
+                <h3 class="card-title">Rosier arbuste</h3>
+                <p class="card-content">Code: R03</p>
+                <p class="card-content">Prix: 8 euros</p>
+                <button class="card-button">Acheter</button>
+            </div>
+        </div>
+    </main>
+    <footer>
         <p>® Copyrights Mathis DUVIVE fait le 22/09/2023</p>
-</footer>
-	  
+    </footer>
+</body>
 </html>
-	  

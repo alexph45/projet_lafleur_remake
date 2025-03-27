@@ -1,57 +1,127 @@
 /* Alignement du texte au centre pour les éléments spécifiés */
 h1, h2, h3, h4, p, nav {
   text-align: center;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 /* Sous-ligne pour les titres de niveau 1 */
 h1 {
   text-decoration: underline;
+  color: #333;
 }
 
 /* Styles généraux pour le corps de la page */
 body {
-  background-color: orange;
-  color: black;
+  background-color: #f9f9f9;
+  color: #333;
+  font-family: 'Georgia', serif;
+  margin: 0;
+  padding: 0;
 }
 
 /* Styles spécifiques pour la barre de navigation */
 nav {
-  background-color: orange;
-  color: black;
+  background-color: #fff;
+  color: #333;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Styles spécifiques pour les sections */
 section {
-  background-color: pink;
-  color: black;
+  background-color: #fff;
+  color: #333;
+  padding: 2rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Styles spécifiques pour l'en-tête */
 header {
-  background-color: green;
-  color: black;
+  background-color: #e6f7ff;
+  color: #333;
+  padding: 2rem;
+  border-bottom: 2px solid #d1e7dd;
 }
 
 /* Styles spécifiques pour le pied de page */
 footer {
-  background-color: green;
-  color: black;
+  background-color: #e6f7ff;
+  color: #333;
+  padding: 1rem;
+  border-top: 2px solid #d1e7dd;
 }
 
-/* Centrer le tableau sur la page */
-table {
-  margin: auto;
+/* Style général pour les cartes */
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 1rem;
+  padding: 1rem;
+  width: 300px; /* Largeur fixe pour toutes les cartes */
+  height: 400px; /* Hauteur fixe pour toutes les cartes */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s;
 }
 
-/* Centrer le texte dans les cellules du tableau */
-td {
-  text-align: center;
+/* Effet de survol pour les cartes */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Style pour le conteneur des cartes */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Style pour le titre de la carte */
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+/* Style pour le contenu de la carte */
+.card-content {
+  font-size: 1rem;
+  color: #555;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Style pour les boutons dans les cartes */
+.card-button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 1rem;
+}
+
+.card-button:hover {
+  background-color: #218838;
 }
 
 /* Centrer une image */
 img {
   display: block;
   margin: auto;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
 /* Styles pour les liens */
@@ -59,29 +129,44 @@ a {
   outline: none;
   text-decoration: none;
   padding: 2px 1px 0;
-  color: #265301; /* Couleur de base pour les liens non visités */
+  color: #28a745; /* Couleur de base pour les liens non visités */
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* Couleur des liens visités */
 a:visited {
-  color: #437a16;
+  color: #218838;
 }
 
 /* Styles lorsqu'un lien est en focus */
 a:focus {
   border-bottom: 1px solid;
-  background: #bae498;
+  background: #c3e6cb;
 }
 
 /* Styles lorsqu'un lien est survolé */
 a:hover {
   border-bottom: 1px solid;
-  background: #cdfeaa;
+  background: #d4edda;
 }
 
 /* Styles lorsqu'un lien est activé */
 a:active {
-  background: #265301;
-  color: #cdfeaa;
+  background: #28a745;
+  color: #fff;
 }
 
+/* Ajout de styles pour les boutons */
+button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #218838;
+}
