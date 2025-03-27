@@ -19,9 +19,9 @@ require_once '../php/connect.php';
         <button onclick="window.location.href='php/deconnexion.php'">Se déconnecter</button>
         
         <?php if ($_SESSION['role'] === "admin"): ?>
-            <button onclick="window.location.href='backend/administration.php'">Administration</button>
+            <button onclick="window.location.href='administration.php'">Administration</button>
         <?php else: ?>
-            <button onclick="window.location.href='backend/profil.php'">Mon Profil</button>
+            <button onclick="window.location.href='profil.php'">Mon Profil</button>
         <?php endif; ?>
 
     <?php else: ?>

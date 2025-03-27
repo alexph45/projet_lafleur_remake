@@ -24,6 +24,7 @@ require_once '../php/connect.php';
                 <button onclick="window.location.href='modifier_produits.php'">Modifier un produits</button>
                 <button onclick="window.location.href='supprimer_produits.php'">Supprimer un produits</button>
                 <button onclick="window.location.href='gestion_utilisateurs.php'">Liste des utilisateurs</button>
+                <button onclick="window.location.href='gestion_commande.php'">Liste des commandes</button>
             <?php else: ?>
                 <button onclick="window.location.href='backend/profil.php'">Mon Profil</button>
             <?php endif; ?>

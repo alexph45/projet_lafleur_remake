@@ -215,3 +215,115 @@ button:hover {
 .user-table td, .user-table th {
   border-radius: 4px;
 }
+/* Style pour centrer le tableau */
+.commande-table {
+  width: 90%; /* Augmente la largeur du tableau pour plus d'espace */
+  margin: 2rem auto; /* Centrer le tableau horizontalement et ajouter un espacement */
+  border-collapse: collapse; /* Fusionner les bordures */
+  text-align: center; /* Centrer le texte dans les cellules */
+  table-layout: fixed; /* Assure une disposition fixe pour éviter les chevauchements */
+}
+
+/* Style pour les en-têtes du tableau */
+.commande-table th {
+  background-color: #28a745; /* Fond vert pour les en-têtes */
+  color: white; /* Texte en blanc */
+  padding: 1rem; /* Espacement interne */
+  font-weight: bold; /* Gras pour les en-têtes */
+  border: 1px solid #ddd; /* Bordure claire */
+}
+
+/* Style pour les lignes du tableau */
+.commande-table td {
+  background-color: #f9f9f9; /* Fond gris clair pour les cellules */
+  padding: 1rem; /* Espacement interne */
+  border: 1px solid #ddd; /* Bordure légère */
+  word-wrap: break-word; /* Permet le retour à la ligne pour les longs contenus */
+}
+
+/* Style pour les lignes paires du tableau (optionnel, pour ajouter une alternance de couleur) */
+.commande-table tr:nth-child(even) td {
+  background-color: #e6f7ff; /* Fond bleu clair pour les lignes paires */
+}
+
+/* Style pour les lignes au survol */
+.commande-table tr:hover td {
+  background-color: #f1f1f1; /* Changement de couleur au survol */
+}
+
+/* Style pour les bordures du tableau */
+.commande-table {
+  border: 1px solid #ddd; /* Bordure légère autour du tableau */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère pour donner un effet de profondeur */
+}
+
+/* Ajout d'un peu d'espacement autour du tableau */
+.commande-table td, .commande-table th {
+  border-radius: 4px;
+}
+
+/* Style pour les boutons d'actions dans la table */
+.commande-table .btn-livrer {
+  background-color: #28a745; /* Vert pour le bouton */
+  color: white; /* Texte en blanc */
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  display: inline-block; /* Assure que le bouton est bien contenu dans sa cellule */
+  margin: 0 auto; /* Centre le bouton dans la cellule */
+}
+
+.commande-table .btn-livrer:hover {
+  background-color: #218838; /* Changer la couleur au survol */
+}
+
+/* Style pour le texte "Commande livrée" */
+/* Style pour le texte "Commande livrée" */
+.commande-table .livree {
+  background-color: #8bbef5; /* Bleu ciel pour les commandes livrées */
+  color: white; /* Texte blanc pour les commandes livrées */
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: inline-block; /* Assure que le texte est bien contenu dans sa cellule */
+  margin: 0 auto; /* Centre le texte dans la cellule */
+}
+
+
+/* Style pour la pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination a {
+  text-decoration: none;
+  color: #333;
+  padding: 8px 12px;
+  margin: 0 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination a:hover {
+  background-color: #f0f0f0;
+  color: #007BFF;
+}
+
+.pagination a.active {
+  background-color: #007BFF;
+  color: white;
+  border-color: #007BFF;
+}
+
+.pagination a.active:hover {
+  background-color: #0056b3;
+}
