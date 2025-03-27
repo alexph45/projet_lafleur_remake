@@ -13,11 +13,11 @@ require_once '../php/connect.php';
 <body>
 
     <header>
-        <h1><img src="images/ACCUEIL.jpg" width="2%"> Société Lafleur</h1>
+        <h1><img src="../images/ACCUEIL.jpg" width="2%"> Société Lafleur</h1>
 
         <!-- Boutons en fonction de la connexion -->
         <?php if (isset($_SESSION['id_users'])): ?>
-            <button onclick="window.location.href='php/deconnexion.php'">Se déconnecter</button>
+            <button onclick="window.location.href='../php/deconnexion.php'">Se déconnecter</button>
             
             <?php if ($_SESSION['role'] === "admin"): ?>
                 <button onclick="window.location.href='ajout_produits.php'">Ajouter un produits</button>
@@ -25,6 +25,7 @@ require_once '../php/connect.php';
                 <button onclick="window.location.href='supprimer_produits.php'">Supprimer un produits</button>
                 <button onclick="window.location.href='gestion_utilisateurs.php'">Liste des utilisateurs</button>
                 <button onclick="window.location.href='gestion_commande.php'">Liste des commandes</button>
+                <button onclick="window.location.href='../index.php'">retour à l'accueil</button>
             <?php else: ?>
                 <button onclick="window.location.href='backend/profil.php'">Mon Profil</button>
             <?php endif; ?>
