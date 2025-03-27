@@ -36,6 +36,7 @@ try {
             <button onclick="window.location.href='backend/administration.php'">Administration</button>
         <?php else: ?>
             <button onclick="window.location.href='backend/profil.php'">Mon Profil</button>
+            <button onclick="window.location.href='panier.php'">Panier</button>
         <?php endif; ?>
     
     <?php else: ?>
@@ -49,6 +50,7 @@ try {
     <a href="Rosiers.php">Rosiers</a>
     <a href="plante_a_massif.php">Plantes à massif</a>
 </nav>
+<div id="message-panier" class="hidden">Produit ajouté au panier !</div>
 <main>
     <div class="card-container">
         <?php foreach ($produits_massif as $produit): ?>
@@ -60,7 +62,11 @@ try {
                         <p>Prix: <?= htmlspecialchars($produit['prix']) ?> euros</p>
                         <p>Type: <?= htmlspecialchars($categorie['nom_categorie']) ?></p> <!-- Affiche le nom de la catégorie -->
                     </div>
-                <button class="card-button">Acheter</button>
+                    <?php if ($produit['quantite'] > 0): ?>
+                    <button class="ajouter-panier" data-id="<?= $produit['id_produit'] ?>">Ajouter au panier</button>
+                <?php else: ?>
+                    <button class="rupture-stock" disabled>Rupture de stock</button>
+                <?php endif; ?>
             </div>
         <?php endforeach; ?>
     </div>
@@ -68,5 +74,27 @@ try {
 <footer>
     <p>® Copyrights 2025- Alexandre Pech--Rossell</p>
 </footer>
+<script>
+document.querySelectorAll('.ajouter-panier').forEach(button => {
+    button.addEventListener('click', function() {
+        let idProduit = this.getAttribute('data-id');
+
+        fetch('backend/ajouter_panier.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'id_produit=' + idProduit
+        })
+        .then(response => response.text())
+        .then(data => {
+            let messagePanier = document.getElementById('message-panier');
+            messagePanier.style.display = 'block';
+
+            setTimeout(() => {
+                messagePanier.style.display = 'none';
+            }, 3000);
+        });
+    });
+});
+</script>
 </body>
 </html>

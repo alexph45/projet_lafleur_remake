@@ -43,12 +43,12 @@ if (isset($_GET['id']) && isset($_GET['action']) && $_GET['action'] === 'livrer'
 
     <!-- Boutons en fonction de la connexion -->
     <?php if (isset($_SESSION['id_users'])): ?>
-        <button onclick="window.location.href='php/deconnexion.php'">Se déconnecter</button>
+        <button onclick="window.location.href='../php/deconnexion.php'">Se déconnecter</button>
 
         <?php if ($_SESSION['role'] === "admin"): ?>
-            <button onclick="window.location.href='backend/administration.php'">Administration</button>
+            <button onclick="window.location.href='administration.php'">Administration</button>
         <?php else: ?>
-            <button onclick="window.location.href='backend/profil.php'">Mon Profil</button>
+            <button onclick="window.location.href='profil.php'">Mon Profil</button>
         <?php endif; ?>
 
     <?php else: ?>

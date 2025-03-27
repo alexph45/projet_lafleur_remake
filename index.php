@@ -23,6 +23,7 @@ require_once 'php/connect.php';
                 <button onclick="window.location.href='backend/administration.php'">Administration</button>
             <?php else: ?>
                 <button onclick="window.location.href='backend/profil.php'">Mon Profil</button>
+                <button onclick="window.location.href='panier.php'">Panier</button>
             <?php endif; ?>
         
         <?php else: ?>

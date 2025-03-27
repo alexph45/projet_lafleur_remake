@@ -19,7 +19,7 @@ $stmt_user->execute();
 $user = $stmt_user->fetch(PDO::FETCH_ASSOC);
 
 // Requête SQL pour récupérer les commandes de l'utilisateur
-$sql_commande = "SELECT c.id_commande, c.date_commande, c.prix_total, c.statut 
+$sql_commande = "SELECT c.id_commande, c.date_commande, c.prix_total, c.statut ,c.adresse_livraison
                  FROM commandes c
                  WHERE c.id_user = :id_user";
 
@@ -76,11 +76,12 @@ if ($stmt_commande->execute()) {
     
     <?php if ($result): ?>
         <table class="commande-table">
-            <tr><th>Date Commande</th><th>Prix Total</th><th>Statut</th></tr> <!-- En-tête du tableau -->
+            <tr><th>Date Commande</th><th>Prix Total</th><th>Adresse</th><th>Statut</th></tr> <!-- En-tête du tableau -->
             <?php foreach ($result as $row): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($row['date_commande']); ?></td>
                     <td><?php echo htmlspecialchars($row['prix_total']) . " €"; ?></td>
+                    <td><?php echo htmlspecialchars($row['adresse_livraison']); ?></td>
                     <td><?php echo htmlspecialchars($row['statut']); ?></td>
                 </tr>
             <?php endforeach; ?>
