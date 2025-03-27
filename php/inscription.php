@@ -1,53 +1,39 @@
 <?php
 session_start();
+require_once 'connect.php';
 
 // Vérification si l'utilisateur est déjà connecté
-if(isset($_SESSION['username'])) {
-    // Rediriger l'utilisateur vers une page de profil par exemple
+if (isset($_SESSION['user_id'])) {
     header("Location: index.html");
     exit;
 }
 
 // Vérification si le formulaire de connexion est soumis
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-    if(isset($_POST['inscription'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['inscription'])) {
         // Récupérer les données du formulaire
-        $fullname = $_POST['fullname'];
-        $email = $_POST['email'];
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        $fullname = trim($_POST['fullname']);
+        $login = trim($_POST['username']);
+        $password = trim($_POST['password']);
 
-        // Hasher le mot de passe
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        if (!empty($fullname) && !empty($login) && !empty($password)) {
+            try {
+                // Hasher le mot de passe
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        // Connexion à la base de données (à remplacer par vos propres informations)
-        $servername = "localhost";
-        $usernameDB = "nom_utilisateur";
-        $passwordDB = "mot_de_passe";
-        $dbname = "lafleur_scrum";
+                // Insérer un nouvel utilisateur dans la base de données
+                $stmt = $pdo->prepare("INSERT INTO utilisateurs (nom, login, mot_de_passe) VALUES (?, ?, ?)");
+                $stmt->execute([$fullname, $login, $hashed_password]);
 
-        // Création de la connexion
-        $conn = new mysqli($servername, $usernameDB, $passwordDB, $dbname);
-
-        // Vérifier la connexion
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
-        // Préparer et exécuter la requête pour insérer un nouvel utilisateur dans la table clients
-        $sql = "INSERT INTO clients (nom_cli, adresse_cli, mail_cli, motdepasse_cli) VALUES (?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssss", $fullname, $username, $email, $hashed_password);
-
-        if ($stmt->execute()) {
-            echo "Nouvel utilisateur créé avec succès.";
+                $_SESSION['success'] = "Inscription réussie. Vous pouvez vous connecter.";
+                header("Location: connexion.php");
+                exit();
+            } catch (PDOException $e) {
+                $_SESSION['error'] = "Erreur lors de l'inscription.";
+            }
         } else {
-            echo "Erreur lors de la création de l'utilisateur : " . $conn->error;
+            $_SESSION['error'] = "Veuillez remplir tous les champs.";
         }
-
-        // Fermer la connexion à la base de données
-        $stmt->close();
-        $conn->close();
     }
 }
 ?>
@@ -57,22 +43,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Inscription - Société Lafleur</title>
-    <link rel="stylesheet" href="css/style2.css">
-    <link rel="icon" type="image/gif" href="icons8-fleur-16.ico" /> 
+    <link rel="stylesheet" href="../css/inscription.css">
+    <link rel="icon" type="image/gif" href="../images/icons8-fleur-16.ico" /> 
 </head>
 <body>
     <div class="container">
-        <img src="flower_logo.png" alt="Logo Lafleur" width="100">
-        <h1>Inscription - Société Lafleur</h1>
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+        <h1>Inscription</h1>
+        
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="error-message">
+                <?= htmlspecialchars($_SESSION['error']); unset($_SESSION['error']); ?>
+            </div>
+        <?php endif; ?>
+        
+        <form method="post" action="">
             <label for="fullname">Nom complet :</label><br>
-            <input type="text" id="fullname" name="fullname"><br>
-            <label for="email">Adresse e-mail :</label><br>
-            <input type="email" id="email" name="email"><br>
+            <input type="text" id="fullname" name="fullname" required><br>
             <label for="username">Nom d'utilisateur :</label><br>
-            <input type="text" id="username" name="username"><br>
+            <input type="text" id="username" name="username" required><br>
             <label for="password">Mot de passe :</label><br>
-            <input type="password" id="password" name="password"><br><br>
+            <input type="password" id="password" name="password" required><br><br>
             <input type="submit" name="inscription" value="S'inscrire">
         </form>
     </div>

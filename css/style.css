@@ -170,3 +170,48 @@ button {
 button:hover {
   background-color: #218838;
 }
+/* Style pour centrer le tableau */
+.user-table {
+  width: 80%; /* Ajuste la largeur du tableau */
+  margin: 2rem auto; /* Centrer le tableau horizontalement et ajouter un espacement */
+  border-collapse: collapse; /* Fusionner les bordures */
+  text-align: center; /* Centrer le texte dans les cellules */
+}
+
+/* Style pour les en-têtes du tableau */
+.user-table th {
+  background-color: #28a745; /* Fond bleu pour les en-têtes */
+  color: white; /* Texte en blanc */
+  padding: 1rem; /* Espacement interne */
+  font-weight: bold; /* Gras pour les en-têtes */
+  border: 1px solid #ddd; /* Bordure claire */
+}
+
+/* Style pour les lignes du tableau */
+.user-table td {
+  background-color: #f9f9f9; /* Fond gris clair pour les cellules */
+  padding: 1rem; /* Espacement interne */
+  border: 1px solid #ddd; /* Bordure légère */
+}
+
+/* Style pour les lignes paires du tableau (optionnel, pour ajouter une alternance de couleur) */
+.user-table tr:nth-child(even) td {
+  background-color: #e6f7ff; /* Fond bleu clair pour les lignes paires */
+}
+
+/* Style pour les lignes au survol */
+.user-table tr:hover td {
+  background-color: #f1f1f1; /* Changement de couleur au survol */
+}
+
+/* Style pour les bordures du tableau */
+.user-table {
+  border: 1px solid #ddd; /* Bordure légère autour du tableau */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère pour donner un effet de profondeur */
+}
+
+/* Ajout d'un peu d'espacement autour du tableau */
+.user-table td, .user-table th {
+  border-radius: 4px;
+}

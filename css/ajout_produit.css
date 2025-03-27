@@ -1,0 +1,156 @@
+/* Style général pour le corps de la page */
+body {
+    background-color: #e6f7ff; /* Fond bleu ciel */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Georgia', serif;
+}
+
+/* Style général pour le conteneur d'ajout de produit */
+main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Style pour la section du formulaire */
+section {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 350px;
+    text-align: center;
+}
+
+/* Style pour les messages d'erreur et de succès */
+.message {
+    margin-bottom: 1rem;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+/* Style pour les labels des champs de formulaire */
+section label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    text-align: left;
+}
+
+/* Style pour les champs de formulaire */
+section input[type="text"],
+section input[type="number"],
+section textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+/* Style pour le textarea */
+section textarea {
+    resize: vertical;
+    height: 100px; /* Fixer la hauteur du textarea */
+}
+
+/* Style pour le bouton d'ajout de produit */
+section button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+section button:hover {
+    background-color: #218838;
+}
+
+/* Footer */
+footer {
+    background-color: #e6f7ff;
+    color: #333;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+}
+/* Cacher l'input file par défaut */
+input[type="file"] {
+    display: none;
+}
+
+/* Styliser le label pour qu'il ressemble à un bouton */
+label[for="image"] {
+    background-color: #28a745; /* Vert pour correspondre à la couleur du bouton */
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: inline-block;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* Ajouter un effet au survol du label */
+label[for="image"]:hover {
+    background-color: #218838; /* Changer la couleur au survol */
+}
+
+/* Conteneur de l'aperçu de l'image ou du nom */
+#image-preview-container {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* Styliser le nom de l'image */
+#image-name {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Styliser l'aperçu de l'image */
+#image-preview {
+    max-width: 150px;
+    height: auto;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Styliser l'input file quand une image est sélectionnée */
+input[type="file"]:valid + #image-preview-container #image-name {
+    display: block;
+}
