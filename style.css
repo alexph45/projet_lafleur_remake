@@ -1,0 +1,87 @@
+/* Alignement du texte au centre pour les éléments spécifiés */
+h1, h2, h3, h4, p, nav {
+  text-align: center;
+}
+
+/* Sous-ligne pour les titres de niveau 1 */
+h1 {
+  text-decoration: underline;
+}
+
+/* Styles généraux pour le corps de la page */
+body {
+  background-color: orange;
+  color: black;
+}
+
+/* Styles spécifiques pour la barre de navigation */
+nav {
+  background-color: orange;
+  color: black;
+}
+
+/* Styles spécifiques pour les sections */
+section {
+  background-color: pink;
+  color: black;
+}
+
+/* Styles spécifiques pour l'en-tête */
+header {
+  background-color: green;
+  color: black;
+}
+
+/* Styles spécifiques pour le pied de page */
+footer {
+  background-color: green;
+  color: black;
+}
+
+/* Centrer le tableau sur la page */
+table {
+  margin: auto;
+}
+
+/* Centrer le texte dans les cellules du tableau */
+td {
+  text-align: center;
+}
+
+/* Centrer une image */
+img {
+  display: block;
+  margin: auto;
+}
+
+/* Styles pour les liens */
+a {
+  outline: none;
+  text-decoration: none;
+  padding: 2px 1px 0;
+  color: #265301; /* Couleur de base pour les liens non visités */
+}
+
+/* Couleur des liens visités */
+a:visited {
+  color: #437a16;
+}
+
+/* Styles lorsqu'un lien est en focus */
+a:focus {
+  border-bottom: 1px solid;
+  background: #bae498;
+}
+
+/* Styles lorsqu'un lien est survolé */
+a:hover {
+  border-bottom: 1px solid;
+  background: #cdfeaa;
+}
+
+/* Styles lorsqu'un lien est activé */
+a:active {
+  background: #265301;
+  color: #cdfeaa;
+}
+
